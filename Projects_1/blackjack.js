@@ -104,16 +104,16 @@ var blackjack = {
     var playerCard2Value = blackjack.inPlay.playerCards[1].Value;
     playerCardValue = playerCardValue + playerCard2Value;
   },
-  updateDealerCardValue: function () {
-    var dealerCard2Value = blackjack.inPlay.dealerCards[1].Value;
+  dealerCard1Value: function () {
     var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
     dealerCardValue = dealerCard1Value;
-    $("button").on("click", function (e) {
-      if (dealerCardValue !== dealerCard1Value + dealerCard2Value) {
-        dealerCardValue = dealerCard1Value + dealerCard2Value
-      } else {
-        return dealerCardValue;
-      }
+  },
+  showBothofDealersCards: function () {
+    var dealerCard2Value = blackjack.inPlay.dealerCards[1].Value;
+    if (dealerCardValue !== dealerCard1Value + dealerCard2Value) {
+      dealerCardValue = dealerCard1Value + dealerCard2Value
+    } else {
+      return dealerCardValue;
     }
   },
   dealerHitMechanic: function () {
@@ -139,15 +139,44 @@ var blackjack = {
     blackjack.inPlay.dealerCards.push(dealerActualXCard);
   },
   AceValue: function () {
-      for (j = 0; j < this.inPlay.dealerCards.length; j++) {
-        if (blackjack.inPlay.dealerCards[j].Card == 'Ace') {
-          var dealerAce = blackjack.inPlay.dealerCards[j]
-          if (dealerCardValue > 10) {
-            dealerAce.Value = 1;
+    for (j = 0; j < this.inPlay.dealerCards.length; j++) {
+      if (blackjack.inPlay.dealerCards[j].Card == 'Ace') {
+        var dealerAce = blackjack.inPlay.dealerCards[j]
+        if (dealerCardValue > 10) {
+          dealerAce.Value = 1;
         } else {
           dealerAce.Value = 11;
         };
       };
     };
+  },
+  PlayerHitMechanic: function () {
+    var that = this;
+    $("button").on("click", function (e) {
+      var playerHitCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
+      var playerActualHitCard = deck[playerHitCardDealtRandomizedNumber];
+      deck.splice(playerHitCardDealtRandomizedNumber, 1);
+      that.inPlay.playerCards.push(playerActualHitCard);
+      var playerHitCardValue = that.inPlay.PlayerCards[that.inPlay.PlayerCards.length].Value;
+      playerCardValue = playerCardValue + playerHitCardValue;
+      if (playerCardValue > 21) {
+        return "Bust!"
+      } else {
+        // Access button that says Hit again or Stay
+      };
+    })
+  },
+  Outcome: function () {
+    if (playerCardValue > dealerCardValue) {
+      return "Player Wins!"
+      //  Add Code here that adds winnings to bank
+    } else if (playerCardValue = dealerCardValue) {
+      return "Push!"
+    } else (playerCardValue < dealerCardValue) {
+      return "Dealer Wins!"
+    };
+  },
+  Split: function () {
+    if playerCard[]
   }
 }
