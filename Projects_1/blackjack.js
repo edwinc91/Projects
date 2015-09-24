@@ -53,17 +53,18 @@ var deck = [
   {Card: 'Ace', Suit: 'Spade'}
 ];
 
+var playerCardValue = undefined;
+var dealerCardValue = undefined;
+
 var blackjack = {
   cards: deck,
-  DealtCards: [],
   rounds: 0,
   inPlay: {
     playerCards: [],
     dealerCards: [],
   },
   usedCards: [],
-  playerCardValue: undefined,
-  dealerCardValue: undefined,
+
   dealPlayerCard1: function () {
     var playerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var playerActualFirstCard = deck[playerFirstCardDealtRandomizedNumber];
@@ -87,5 +88,16 @@ var blackjack = {
     var dealerActualSecondCard = deck[dealerSecondCardDealtRandomizedNumber];
     deck.splice(dealerSecondCardDealtRandomizedNumber, 1);
     blackjack.inPlay.dealerCards.push(dealerActualSecondCard);
+  },
+  updatePlayerCardValue: function () {
+    var playersCurrentCards = blackjack.inPlay.playerCards;
+    for (i = 0; i < playersCurrentCards.length; i++) {
+      var currentPlayerCardValue = parseInt(playersCurrentCards[i].Card);
+      currentPlayerCardValue = +currentPlayerCardValue
+      playerCardValue = currentPlayerCardValue
+    };
+    // var playerCard1Value = parseInt(blackjack.inPlay.playerCards[0].Card);
+    // var playerCard2Value = parseInt(blackjack.inPlay.playerCards[1].Card);
+    // playerCardValue = playerCard1Value + playerCard2Value;
   }
 }
