@@ -152,7 +152,7 @@ var blackjack = {
   },
   PlayerHitMechanic: function () {
     var that = this;
-    $("button").on("click", function (e) {
+    $('#HitMe').on("click", function (e) {
       var playerHitCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
       var playerActualHitCard = deck[playerHitCardDealtRandomizedNumber];
       deck.splice(playerHitCardDealtRandomizedNumber, 1);
@@ -177,6 +177,9 @@ var blackjack = {
     };
   },
   Split: function () {
-    if playerCard[]
+    if (/* figure out how to search for duplicate card names at once*/) {
+      var splitButton = document.querySelector('#Split');
+      splitButton.toggleClass
+    }
   }
 }
