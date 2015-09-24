@@ -104,24 +104,31 @@ var blackjack = {
     var playerCard2Value = blackjack.inPlay.playerCards[1].Value;
     playerCardValue = playerCardValue + playerCard2Value;
   },
-  updateDealerCard1Value: function () {
-    var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
-    dealerCardValue = dealerCard1Value;
-  },
   updateDealerCardValue: function () {
     var dealerCard2Value = blackjack.inPlay.dealerCards[1].Value;
-    dealerCardValue = dealerCardValue + dealerCard2Value;
+    var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
+    dealerCardValue = dealerCard1Value;
+    $("button").on("click", function (e) {
+      if (dealerCardValue !== dealerCard1Value + dealerCard2Value) {
+        dealerCardValue = dealerCard1Value + dealerCard2Value
+      } else {
+        return dealerCardValue;
+      }
+    }
+  },
+  dealerHitMechanic: function () {
     if (dealerCardValue < 17) {
       this.dealerHit();
-      var dealerCard3Value = blackjack.inPlay.dealerCards[2].Value;
-      dealerCardValue = dealerCardValue + dealerCard3Value;
+      var numberOfCardsDealerIsHolding = blackjack.inPlay.dealerCards;
+      var dealerCard3Value = numberOfCardsDealerIsHolding[numberOfCardsDealerIsHolding.length - 1].Value;
+      dealerCardValue = dealerCardValue + dealerCard3Value;}
     // } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
     //   this.dealerHit();
     //   var dealerCard3Value = blackjack.inPlay.dealerCards[3].Value;
     //   dealerCardValue = dealerCardValue + dealerCard3Value
     // } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
 
-    } else {
+    else {
       return dealerCardValue;
     }
   },
