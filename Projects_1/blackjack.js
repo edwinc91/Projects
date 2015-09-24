@@ -58,16 +58,34 @@ var blackjack = {
   DealtCards: [],
   rounds: 0,
   inPlay: {
-    PlayerCards: [],
-    DealerCards: [],
+    playerCards: [],
+    dealerCards: [],
   },
   usedCards: [],
-  PlayerCardValue: undefined,
-  DealerCardValue: undefined,
+  playerCardValue: undefined,
+  dealerCardValue: undefined,
   dealPlayerCard1: function () {
-    var PlayerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * decks.length);
-    var PlayerActualFirstCard = decks[PlayerFirstCardDealtRandomizedNumber];
-    deck.splice(PlayerFirstCardDealtRandomizedNumber, 1);
-    blackjack.inPlay.playerCards.push(PlayerActualFirstCard);
+    var playerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
+    var playerActualFirstCard = deck[playerFirstCardDealtRandomizedNumber];
+    deck.splice(playerFirstCardDealtRandomizedNumber, 1);
+    blackjack.inPlay.playerCards.push(playerActualFirstCard);
+  },
+  dealDealerCard1: function () {
+    var dealerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
+    var dealerActualFirstCard = deck[dealerFirstCardDealtRandomizedNumber];
+    deck.splice(dealerFirstCardDealtRandomizedNumber, 1);
+    blackjack.inPlay.dealerCards.push(dealerActualFirstCard);
+  },
+  dealPlayerCard2: function () {
+    var playerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
+    var playerActualSecondCard = deck[playerSecondCardDealtRandomizedNumber];
+    deck.splice(playerSecondCardDealtRandomizedNumber, 1);
+    blackjack.inPlay.playerCards.push(playerActualSecondCard);
+  },
+  dealDealerCard2: function () {
+    var dealerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
+    var dealerActualSecondCard = deck[dealerSecondCardDealtRandomizedNumber];
+    deck.splice(dealerSecondCardDealtRandomizedNumber, 1);
+    blackjack.inPlay.dealerCards.push(dealerActualSecondCard);
   }
 }
