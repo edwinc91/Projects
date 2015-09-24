@@ -92,8 +92,9 @@ var blackjack = {
   updatePlayerCardValue: function () {
     var playersCurrentCards = blackjack.inPlay.playerCards;
     for (i = 0; i < playersCurrentCards.length; i++) {
-      var currentPlayerCardValue = parseInt(playersCurrentCards[i].Card);
-      currentPlayerCardValue = +currentPlayerCardValue
+      var currentPlayerCardValue = function() {
+        parseInt(playersCurrentCards[i].Card)};
+      currentPlayerCardValue = currentPlayerCardValue + new currentPlayerCardValue
       playerCardValue = currentPlayerCardValue
     };
     // var playerCard1Value = parseInt(blackjack.inPlay.playerCards[0].Card);
