@@ -1,56 +1,56 @@
 var deck = [
-  {Card: '2', Suit: 'Diamond'},
-  {Card: '2', Suit: 'Clover'},
-  {Card: '2', Suit: 'Heart'},
-  {Card: '2', Suit: 'Spade'},
-  {Card: '3', Suit: 'Diamond'},
-  {Card: '3', Suit: 'Clover'},
-  {Card: '3', Suit: 'Heart'},
-  {Card: '3', Suit: 'Spade'},
-  {Card: '4', Suit: 'Diamond'},
-  {Card: '4', Suit: 'Clover'},
-  {Card: '4', Suit: 'Heart'},
-  {Card: '4', Suit: 'Spade'},
-  {Card: '5', Suit: 'Diamond'},
-  {Card: '5', Suit: 'Clover'},
-  {Card: '5', Suit: 'Heart'},
-  {Card: '5', Suit: 'Spade'},
-  {Card: '6', Suit: 'Diamond'},
-  {Card: '6', Suit: 'Clover'},
-  {Card: '6', Suit: 'Heart'},
-  {Card: '6', Suit: 'Spade'},
-  {Card: '7', Suit: 'Diamond'},
-  {Card: '7', Suit: 'Clover'},
-  {Card: '7', Suit: 'Heart'},
-  {Card: '7', Suit: 'Spade'},
-  {Card: '8', Suit: 'Diamond'},
-  {Card: '8', Suit: 'Clover'},
-  {Card: '8', Suit: 'Heart'},
-  {Card: '8', Suit: 'Spade'},
-  {Card: '9', Suit: 'Diamond'},
-  {Card: '9', Suit: 'Clover'},
-  {Card: '9', Suit: 'Heart'},
-  {Card: '9', Suit: 'Spade'},
-  {Card: '10', Suit: 'Diamond'},
-  {Card: '10', Suit: 'Clover'},
-  {Card: '10', Suit: 'Heart'},
-  {Card: '10', Suit: 'Spade'},
-  {Card: 'Jack', Suit: 'Diamond'},
-  {Card: 'Jack', Suit: 'Clover'},
-  {Card: 'Jack', Suit: 'Heart'},
-  {Card: 'Jack', Suit: 'Spade'},
-  {Card: 'Queen', Suit: 'Diamond'},
-  {Card: 'Queen', Suit: 'Clover'},
-  {Card: 'Queen', Suit: 'Heart'},
-  {Card: 'Queen', Suit: 'Spade'},
-  {Card: 'King', Suit: 'Diamond'},
-  {Card: 'King', Suit: 'Clover'},
-  {Card: 'King', Suit: 'Heart'},
-  {Card: 'King', Suit: 'Spade'},
-  {Card: 'Ace', Suit: 'Diamond'},
-  {Card: 'Ace', Suit: 'Clover'},
-  {Card: 'Ace', Suit: 'Heart'},
-  {Card: 'Ace', Suit: 'Spade'}
+  {Card: '2', Suit: 'Diamond', Value: 2},
+  {Card: '2', Suit: 'Clover', Value: 2},
+  {Card: '2', Suit: 'Heart', Value: 2},
+  {Card: '2', Suit: 'Spade', Value: 2},
+  {Card: '3', Suit: 'Diamond', Value: 3},
+  {Card: '3', Suit: 'Clover', Value: 3},
+  {Card: '3', Suit: 'Heart', Value: 3},
+  {Card: '3', Suit: 'Spade', Value: 3},
+  {Card: '4', Suit: 'Diamond', Value: 4},
+  {Card: '4', Suit: 'Clover', Value: 4},
+  {Card: '4', Suit: 'Heart', Value: 4},
+  {Card: '4', Suit: 'Spade', Value: 4},
+  {Card: '5', Suit: 'Diamond', Value: 5},
+  {Card: '5', Suit: 'Clover', Value: 5},
+  {Card: '5', Suit: 'Heart', Value: 5},
+  {Card: '5', Suit: 'Spade', Value: 5},
+  {Card: '6', Suit: 'Diamond', Value: 6},
+  {Card: '6', Suit: 'Clover', Value: 6},
+  {Card: '6', Suit: 'Heart', Value: 6},
+  {Card: '6', Suit: 'Spade', Value: 6},
+  {Card: '7', Suit: 'Diamond', Value: 7},
+  {Card: '7', Suit: 'Clover', Value: 7},
+  {Card: '7', Suit: 'Heart', Value: 7},
+  {Card: '7', Suit: 'Spade', Value: 7},
+  {Card: '8', Suit: 'Diamond', Value: 8},
+  {Card: '8', Suit: 'Clover', Value: 8},
+  {Card: '8', Suit: 'Heart', Value: 8},
+  {Card: '8', Suit: 'Spade', Value: 8},
+  {Card: '9', Suit: 'Diamond', Value: 9},
+  {Card: '9', Suit: 'Clover', Value: 9},
+  {Card: '9', Suit: 'Heart', Value: 9},
+  {Card: '9', Suit: 'Spade', Value: 9},
+  {Card: '10', Suit: 'Diamond', Value: 10},
+  {Card: '10', Suit: 'Clover', Value: 10},
+  {Card: '10', Suit: 'Heart', Value: 10},
+  {Card: '10', Suit: 'Spade', Value: 10},
+  {Card: 'Jack', Suit: 'Diamond', Value: 10},
+  {Card: 'Jack', Suit: 'Clover', Value: 10},
+  {Card: 'Jack', Suit: 'Heart', Value: 10},
+  {Card: 'Jack', Suit: 'Spade', Value: 10},
+  {Card: 'Queen', Suit: 'Diamond', Value: 10},
+  {Card: 'Queen', Suit: 'Clover', Value: 10},
+  {Card: 'Queen', Suit: 'Heart', Value: 10},
+  {Card: 'Queen', Suit: 'Spade', Value: 10},
+  {Card: 'King', Suit: 'Diamond', Value: 10},
+  {Card: 'King', Suit: 'Clover', Value: 10},
+  {Card: 'King', Suit: 'Heart', Value: 10},
+  {Card: 'King', Suit: 'Spade', Value: 10},
+  {Card: 'Ace', Suit: 'Diamond', Value: undefined},
+  {Card: 'Ace', Suit: 'Clover', Value: undefined},
+  {Card: 'Ace', Suit: 'Heart', Value: undefined},
+  {Card: 'Ace', Suit: 'Spade', Value: undefined}
 ];
 
 var playerCardValue = undefined;
@@ -89,16 +89,58 @@ var blackjack = {
     deck.splice(dealerSecondCardDealtRandomizedNumber, 1);
     blackjack.inPlay.dealerCards.push(dealerActualSecondCard);
   },
-  updatePlayerCardValue: function () {
-    var playersCurrentCards = blackjack.inPlay.playerCards;
-    for (i = 0; i < playersCurrentCards.length; i++) {
-      var currentPlayerCardValue = function() {
-        parseInt(playersCurrentCards[i].Card)};
-      currentPlayerCardValue = currentPlayerCardValue + new currentPlayerCardValue
-      playerCardValue = currentPlayerCardValue
+  // updatePlayerCardValue: function () {
+  //   var playersCurrentCards = blackjack.inPlay.playerCards;
+    // for (i = 0; i < playersCurrentCards.length; i++) {
+    //   currentPlayerCardValue = parseInt(playersCurrentCards[i].Card)
+    //   currentPlayerCardValue = currentPlayerCardValue + new currentPlayerCardValue
+    //   playerCardValue = currentPlayerCardValue
+    // };
+  updatePlayerCard1Value : function () {
+    var playerCard1Value = blackjack.inPlay.playerCards[0].Value;
+    playerCardValue = playerCard1Value
+  },
+  updatePlayerCard2Value: function () {
+    var playerCard2Value = blackjack.inPlay.playerCards[1].Value;
+    playerCardValue = playerCardValue + playerCard2Value;
+  },
+  updateDealerCard1Value: function () {
+    var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
+    dealerCardValue = dealerCard1Value;
+  },
+  updateDealerCardValue: function () {
+    var dealerCard2Value = blackjack.inPlay.dealerCards[1].Value;
+    dealerCardValue = dealerCardValue + dealerCard2Value;
+    if (dealerCardValue < 17) {
+      this.dealerHit();
+      var dealerCard3Value = blackjack.inPlay.dealerCards[2].Value;
+      dealerCardValue = dealerCardValue + dealerCard3Value;
+    // } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
+    //   this.dealerHit();
+    //   var dealerCard3Value = blackjack.inPlay.dealerCards[3].Value;
+    //   dealerCardValue = dealerCardValue + dealerCard3Value
+    // } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
+
+    } else {
+      return dealerCardValue;
+    }
+  },
+  dealerHit: function () {
+    var dealerXCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
+    var dealerActualXCard = deck[dealerXCardDealtRandomizedNumber];
+    deck.splice(dealerXCardDealtRandomizedNumber, 1);
+    blackjack.inPlay.dealerCards.push(dealerActualXCard);
+  },
+  AceValue: function () {
+      for (j = 0; j < this.inPlay.dealerCards.length; j++) {
+        if (blackjack.inPlay.dealerCards[j].Card == 'Ace') {
+          var dealerAce = blackjack.inPlay.dealerCards[j]
+          if (dealerCardValue > 10) {
+            dealerAce.Value = 1;
+        } else {
+          dealerAce.Value = 11;
+        };
+      };
     };
-    // var playerCard1Value = parseInt(blackjack.inPlay.playerCards[0].Card);
-    // var playerCard2Value = parseInt(blackjack.inPlay.playerCards[1].Card);
-    // playerCardValue = playerCard1Value + playerCard2Value;
   }
 }
