@@ -150,7 +150,7 @@ var blackjack = {
       };
     };
   },
-  PlayerHitMechanic: function () {
+  playerHitMechanic: function () {
     var that = this;
     $('#HitMe').on("click", function (e) {
       var playerHitCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
@@ -166,22 +166,34 @@ var blackjack = {
       };
     })
   },
-  Outcome: function () {
+  outcome: function () {
     if (playerCardValue > dealerCardValue && playerCardValue < 22) {
-      return "Player Wins!"
       this.rounds++
+      return "Player Wins!"
       //  Add Code here that adds winnings to bank
     } else if (playerCardValue == dealerCardValue && playerCardValue < 22) {
+      this.rounds++
       return "Push!"
-      this.rounds++
     } else if (playerCardValue < dealerCardValue && dealerCardValue < 22) {
+      this.rounds++
       return "Dealer Wins!"
-      this.rounds++
     } else if (dealerCardValue > 21 && playerCardValue < 22) {
-      return "Player Wins!"
       this.rounds++
-      console.log(this.rounds)
+      return "Player Wins!"
     };
+  },
+  clearTable: function() {
+    // set up html/css interactions that clear the images of the cards
+    this.usedCards.push(this.inPlay.playerCards)
+    this.usedCards.push(this.inPlay.dealerCards)
+    this.inPlay.playerCards = []
+    this.inPlay.dealerCards = []
+  },
+  shuffleDeck: function () {
+    if (deck.length < 20) {
+      deck.push(this.inPlay.usedCards)
+      this.usedCards = []
+    }
   },
   // Split: function () {
   //   if (/* figure out how to search for duplicate card names at once*/) {
