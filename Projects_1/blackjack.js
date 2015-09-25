@@ -60,6 +60,8 @@ var blackjack = {
   cards: deck,
   rounds: 0,
   inPlay: {
+    playerAces: [], // if playerAces.length > 2 - playerAces[1].value = 1
+    dealerAces: [], // ^^
     playerCards: [],
     dealerCards: [],
   },
@@ -70,12 +72,14 @@ var blackjack = {
     var playerActualFirstCard = deck[playerFirstCardDealtRandomizedNumber];
     deck.splice(playerFirstCardDealtRandomizedNumber, 1);
     blackjack.inPlay.playerCards.push(playerActualFirstCard);
+    // dealDealerCard1();
   },
   dealDealerCard1: function () {
     var dealerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualFirstCard = deck[dealerFirstCardDealtRandomizedNumber];
     deck.splice(dealerFirstCardDealtRandomizedNumber, 1);
     blackjack.inPlay.dealerCards.push(dealerActualFirstCard);
+    // dealDealerCard1();
   },
   dealPlayerCard2: function () {
     var playerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
@@ -132,6 +136,8 @@ var blackjack = {
       return dealerCardValue;
     }
   },
+
+
   dealerHit: function () {
     var dealerXCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualXCard = deck[dealerXCardDealtRandomizedNumber];
@@ -150,6 +156,15 @@ var blackjack = {
       };
     };
   },
+  //
+  AceValue2: function () {
+        if(dealerCardValue < 10){
+          if(this.inPlay.dealerAce.length > 1){
+            this.inPlay.dealerAce[0].value = 11
+          }
+        }
+  },
+  //
   playerHitMechanic: function () {
     var that = this;
     $('#HitMe').on("click", function (e) {
