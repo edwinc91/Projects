@@ -167,19 +167,26 @@ var blackjack = {
     })
   },
   Outcome: function () {
-    if (playerCardValue > dealerCardValue) {
+    if (playerCardValue > dealerCardValue && playerCardValue < 22) {
       return "Player Wins!"
+      this.rounds++
       //  Add Code here that adds winnings to bank
-    } else if (playerCardValue = dealerCardValue) {
+    } else if (playerCardValue == dealerCardValue && playerCardValue < 22) {
       return "Push!"
-    } else (playerCardValue < dealerCardValue) {
+      this.rounds++
+    } else if (playerCardValue < dealerCardValue && dealerCardValue < 22) {
       return "Dealer Wins!"
+      this.rounds++
+    } else if (dealerCardValue > 21 && playerCardValue < 22) {
+      return "Player Wins!"
+      this.rounds++
+      console.log(this.rounds)
     };
   },
-  Split: function () {
-    if (/* figure out how to search for duplicate card names at once*/) {
-      var splitButton = document.querySelector('#Split');
-      splitButton.toggleClass
-    }
-  }
+  // Split: function () {
+  //   if (/* figure out how to search for duplicate card names at once*/) {
+  //     var splitButton = document.querySelector('#Split');
+  //     $(splitButton).toggleClass("inactive", addOrRemove);
+  //   }
+  // }
 }
