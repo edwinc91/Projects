@@ -70,15 +70,23 @@ var blackjack = {
   dealPlayerCard1: function () {
     var playerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var playerActualFirstCard = deck[playerFirstCardDealtRandomizedNumber];
+    if (playerActualFirstCard).Card == 'Ace' {
+      blackjack.inPlay.playerAces.push(playerActualFirstCard)
+    } else {
+      blackjack.inPlay.playerCards.push(playerActualFirstCard);
+    };
     deck.splice(playerFirstCardDealtRandomizedNumber, 1);
-    blackjack.inPlay.playerCards.push(playerActualFirstCard);
     // dealDealerCard1();
   },
   dealDealerCard1: function () {
     var dealerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualFirstCard = deck[dealerFirstCardDealtRandomizedNumber];
+    if (dealerActualFirstCard).Card == 'Ace' {
+      blackjack.inPlay.dealerAces.push(dealerActualFirstCard)
+    } else {
+      blackjack.inPlay.dealerCards.push(dealerActualFirstCard);
+    };
     deck.splice(dealerFirstCardDealtRandomizedNumber, 1);
-    blackjack.inPlay.dealerCards.push(dealerActualFirstCard);
     // dealDealerCard1();
   },
   dealPlayerCard2: function () {
@@ -196,6 +204,7 @@ var blackjack = {
       this.rounds++
       return "Player Wins!"
     };
+    this.shuffleDeck();
   },
   clearTable: function() {
     // set up html/css interactions that clear the images of the cards
@@ -210,6 +219,7 @@ var blackjack = {
       this.usedCards = []
     }
   },
+
   // Split: function () {
   //   if (/* figure out how to search for duplicate card names at once*/) {
   //     var splitButton = document.querySelector('#Split');
@@ -217,3 +227,13 @@ var blackjack = {
   //   }
   // }
 }
+
+
+// aces function?
+// function () {
+//     for (var i = 0; i < this.inPlay.playerCards.length; i++){
+//       if(this.inPlay.playerCards[i].Card === 'Ace'){
+//         this.inPlay.hasAce = true;
+//       }
+//     }
+//   }
