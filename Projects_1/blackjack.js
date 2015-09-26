@@ -205,31 +205,19 @@ var blackjack = {
     if (playerCardValue > dealerCardValue && playerCardValue < 22) {
       console.log("Player Wins!")
       this.clearTable()
-      if (deck.length < 20) {
-      this.shuffleDeck()
-      }
       this.rounds++
       //  Add Code here that adds winnings to bank
     } else if (playerCardValue == dealerCardValue && playerCardValue < 22) {
       console.log("Push!")
       this.clearTable()
-      if (deck.length < 20) {
-      this.shuffleDeck()
-      }
       this.rounds++
     } else if (playerCardValue < dealerCardValue && dealerCardValue < 22) {
       console.log("Dealer Wins!")
       this.clearTable()
-      if (deck.length < 20) {
-      this.shuffleDeck()
-      }
       this.rounds++
     } else if (dealerCardValue > 21 && playerCardValue < 22) {
       console.log("Player Wins!")
       this.clearTable()
-      if (deck.length < 20) {
-      this.shuffleDeck()
-      }
       this.rounds++
     };
   },
@@ -251,6 +239,9 @@ var blackjack = {
       this.usedCards.push(this.inPlay.dealerAces[r])
     }
     this.inPlay.dealerAces = []
+    if (deck.length < 20) {
+      this.shuffleDeck()
+    }
   },
   shuffleDeck: function () {
     for (var k = 0; k < this.usedCards.length; k++) {
