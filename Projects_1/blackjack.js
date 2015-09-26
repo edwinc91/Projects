@@ -203,42 +203,69 @@ var blackjack = {
   },
   outcome: function () {
     if (playerCardValue > dealerCardValue && playerCardValue < 22) {
+      console.log("Player Wins!")
+      this.clearTable()
+      if (deck.length < 20) {
+      this.shuffleDeck()
+      }
       this.rounds++
-      return "Player Wins!"
       //  Add Code here that adds winnings to bank
     } else if (playerCardValue == dealerCardValue && playerCardValue < 22) {
+      console.log("Push!")
+      this.clearTable()
+      if (deck.length < 20) {
+      this.shuffleDeck()
+      }
       this.rounds++
-      return "Push!"
     } else if (playerCardValue < dealerCardValue && dealerCardValue < 22) {
+      console.log("Dealer Wins!")
+      this.clearTable()
+      if (deck.length < 20) {
+      this.shuffleDeck()
+      }
       this.rounds++
-      return "Dealer Wins!"
     } else if (dealerCardValue > 21 && playerCardValue < 22) {
+      console.log("Player Wins!")
+      this.clearTable()
+      if (deck.length < 20) {
+      this.shuffleDeck()
+      }
       this.rounds++
-      return "Player Wins!"
     };
-    this.shuffleDeck();
   },
   clearTable: function() {
     // set up html/css interactions that clear the images of the cards
-    this.usedCards.push(this.inPlay.playerCards)
-    this.usedCards.push(this.inPlay.dealerCards)
+    for (var q = 0; q < this.inPlay.playerCards.length; q++) {
+      this.usedCards.push(this.inPlay.playerCards[q])
+    }
     this.inPlay.playerCards = []
+    for (var w = 0; w < this.inPlay.playerAces.length; w++) {
+      this.usedCards.push(this.inPlay.playerAces[w])
+    }
+    this.inPlay.playerAces = []
+    for (var e = 0; e < this.inPlay.dealerCards.length; e++) {
+      this.usedCards.push(this.inPlay.dealerCards[e])
+    }
     this.inPlay.dealerCards = []
+    for (var r = 0; r < this.inPlay.dealerAces.length; r++) {
+      this.usedCards.push(this.inPlay.dealerAces[r])
+    }
+    this.inPlay.dealerAces = []
   },
   shuffleDeck: function () {
-    if (deck.length < 20) {
-      deck.push(this.inPlay.usedCards)
-      this.usedCards = []
+    for (var k = 0; k < this.usedCards.length; k++) {
+      deck.push(this.usedCards[k])
     }
+    this.usedCards = []
   },
-
+}
   // Split: function () {
   //   if (/* figure out how to search for duplicate card names at once*/) {
   //     var splitButton = document.querySelector('#Split');
   //     $(splitButton).toggleClass("inactive", addOrRemove);
   //   }
   // }
-}
+
 
 
 // aces function?
