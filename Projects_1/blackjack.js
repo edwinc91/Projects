@@ -154,9 +154,9 @@ var blackjack = {
   dealerCard1Value: function () {
     if (this.inPlay.dealerAces.length = 0) {
       var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
-      dealerCardValue = dealerCard1Value;
+      dealerCardValue = dealerCard1Value
     } else {
-      var dealerFirstCardIsAnAce = this.inPlay.dealerAces[0].Value;
+      var dealerFirstCardIsAnAce = blackjack.inPlay.dealerAces[0].Value;
       dealerCardValue = dealerFirstCardIsAnAce
     }
     this.dealPlayerCard2();
