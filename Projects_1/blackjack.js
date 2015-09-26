@@ -107,7 +107,12 @@ var blackjack = {
       }
     } else {
       blackjack.inPlay.playerCards.push(playerActualSecondCard);
-      this.updatePlayerCard2ValueNoAce();
+      if (this.inPlay.playerAces.length = 0) {
+        this.updatePlayerCard2ValueNoAce();
+      } else {
+        this.updatePlayerCard1Value();
+        this.updatePlayerCard2ValueOneAce();
+      }
     };
     deck.splice(playerSecondCardDealtRandomizedNumber, 1);
   },
@@ -148,7 +153,8 @@ var blackjack = {
   },
   updatePlayerCard2ValueOneAce: function () {
     var playerSecondCardWasAnAce = blackjack.inPlay.playerAces[0].Value;
-    playerCardValue = playerCardValue + playerSecondCardWasAnAce
+    var playerHasNonAceOneOutOfTwo = blackjack.inPlay.playerCards[0].Value;
+    playerCardValue = playerHasNonAceOneOutOfTwo + playerSecondCardWasAnAce
     this.dealDealerCard2();
   },
   updatePlayerCard2ValueTwoAce: function () {
@@ -185,27 +191,33 @@ var blackjack = {
       this.dealerHit();
       var numberOfCardsDealerIsHolding = blackjack.inPlay.dealerCards;
       var dealerCard3Value = numberOfCardsDealerIsHolding[numberOfCardsDealerIsHolding.length - 1].Value;
-      dealerCardValue = dealerCardValue + dealerCard3Value;}
-    else if (dealerCardValue = 17 && this.inPlay.dealerAces.length = 1) {
-      var dealerCard3ValueHasOneAce =
-      if (dealerCardValue > 10) {
-        this.inPlay.dealerAces[0].Value = 1
-      }
-    } else if (dealerCardValue = 17 && this.inPlay.dealerAces.length !== 0) {
-      this.dealerHit();
-      var dealerCard3Value = blackjack.inPlay.dealerCards[3].Value;
       dealerCardValue = dealerCardValue + dealerCard3Value
-    } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
-
-    else {
+    } else if (dealerCardValue = 17) {
+      if (this.inPlay.dealerAces.length = 1)
+        this.dealerHit()
+        if (this.inPlay.dealerAces.length = 1) {
+          if (this.inPlay.dealerCards[this.inPlay.dealerCards.length - 1].Value > 4) {
+            this.inPlay.dealerAces[0].Value = 1
+          } else {
+            for (var o = 1; o < this.inPlay.dealerAces.length; o++) {
+              this.inPlay.dealerAces[o].Value = 1
+            }
+          }
+        }
+      } else {
+      // dealer stays
       return dealerCardValue;
     }
   },
   dealerHit: function () {
     var dealerXCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualXCard = deck[dealerXCardDealtRandomizedNumber];
+    if (dealerActualXCard.Card = 'Ace') {
+      blackjack.inPlay.dealerAces.push(dealerActualXCard)
+    } else {
+      blackjack.inPlay.dealerCards.push(dealerActualXCard);
+    }
     deck.splice(dealerXCardDealtRandomizedNumber, 1);
-    blackjack.inPlay.dealerCards.push(dealerActualXCard);
   },
   // AceValue: function () {
   //   for (j = 0; j < this.inPlay.dealerCards.length; j++) {
@@ -235,31 +247,46 @@ var blackjack = {
       var playerActualHitCard = deck[playerHitCardDealtRandomizedNumber];
       if (playerActualHitCard.Card == 'Ace') {
         that.inPlay.playerAces.push(playerActualHitCard)
-        if (that.inPlay.playerAces.length = 1 && playerCardValue < 11) {
-          that.inPlay.playerAces[0].Value = 11
+        if (that.inPlay.playerAces.length = 1) {
+          if (playerCardValue < 11) {
+            that.inPlay.playerAces[0].Value = 11
+          } else {
+            that.inPlay.playerAces[0].Value = 1
+          }
         } else if (that.inPlay.playerAces.length = 2) {
-          that.inPlay.playerAces[0].Value = 11
-          that.inPlay.playerAces[1].Value = 1
-        } else {
-          for (var t = 1; t < that.inPlay.playerAces.length; t++) {
-            that.inPlay.playerAces[t].Value = 1
+          if (playerCardValue < 10) {
+            that.inPlay.playerAces[0].Value = 11
+            that.inPlay.playerAces[1].Value = 1
+          } else {
+            that.inPlay.playerAces[0].Value = 1
+            that.inPlay.playerAces[1].Value = 1
+          }
+        } else if (that.inPlay.playerAces.length > 2) {
+          if (playerCardValue < 11 - that.inPlay.playerAces.length) {
+            for (var t = 1; t < that.inPlay.playerAces.length; t++) {
+              that.inPlay.playerAces[t].Value = 1
+            }
+          } else {
+            for (var u = 0; t < that.inPlay.playerAces.length; u++) {
+              that.inPlay.playerAces[u].Value = 1
           }
         }
-      } else {
-        that.inPlay.playerCards.push(playerActualHitCard);
       }
-      deck.splice(playerHitCardDealtRandomizedNumber, 1);
-      if (playerActualHitCard.Card == 'Ace') {
-        var playerHitCardIsAce = that.inPlay.playerAces[that.inPlay.playerAces.length - 1].Value
-        playerCardValue = playerCardValue + playerHitCardisAce
-      }
-      var playerHitCardValue = that.inPlay.PlayerCards[that.inPlay.PlayerCards.length].Value;
-      playerCardValue = playerCardValue + playerHitCardValue;
-      if (playerCardValue > 21) {
+    } else {
+      that.inPlay.playerCards.push(playerActualHitCard);
+    }
+    deck.splice(playerHitCardDealtRandomizedNumber, 1);
+    if (playerActualHitCard.Card == 'Ace') {
+      var playerHitCardIsAce = that.inPlay.playerAces[that.inPlay.playerAces.length - 1].Value
+      playerCardValue = playerCardValue + playerHitCardisAce
+    }
+    var playerHitCardValue = blackjack.inPlay.playerCards[blackjack.inPlay.playerCards.length].Value;
+    playerCardValue = playerCardValue + playerHitCardValue;
+    if (playerCardValue > 21) {
         return "Bust!"
-      } else {
-        // Access button that says Hit again or Stay
-      };
+    } else {
+      // Access button that says Hit again or Stay
+      }
     })
   },
   outcome: function () {
