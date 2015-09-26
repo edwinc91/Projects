@@ -129,18 +129,36 @@ var blackjack = {
     //   playerCardValue = currentPlayerCardValue
     // };
   updatePlayerCard1Value : function () {
+    if (this.inPlay.playerAces.length !== 0) {
+      var playerFirstCardIsAce = this.inPlay.playerAces[0].Value;
+      playerCardValue = playerFirstCardIsAce
+    } else {
     var playerCard1Value = blackjack.inPlay.playerCards[0].Value;
-    playerCardValue = playerCard1Value
+      playerCardValue = playerCard1Value
+    }
     this.dealDealerCard1();
   },
   updatePlayerCard2Value: function () {
-    var playerCard2Value = blackjack.inPlay.playerCards[1].Value;
-    playerCardValue = playerCardValue + playerCard2Value;
+    if (this.inPlay.playerAces.length = 0) {
+      var playerCard2Value = blackjack.inPlay.playerCards[1].Value;
+      playerCardValue = playerCardValue + playerCard2Value;
+    } else if (this.inPlay.playerAces.length = 1) {
+      var playerSecondCardWasAnAce = blackjack.inPlay.playerAces[0].Value;
+      playerCardValue = playerCardValue + playerSecondCardWasAnAce
+    } else {
+      this.inPlay.playerAces[1].Value = 1
+      playerCardValue++
+    }
     this.dealDealerCard2();
   },
   dealerCard1Value: function () {
-    var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
-    dealerCardValue = dealerCard1Value;
+    if (this.inPlay.dealerAces.length = 0) {
+      var dealerCard1Value = blackjack.inPlay.dealerCards[0].Value;
+      dealerCardValue = dealerCard1Value;
+    } else {
+      var dealerFirstCardIsAnAce = this.inPlay.dealerAces[0].Value;
+      dealerCardValue = dealerFirstCardIsAnAce
+    }
     this.dealPlayerCard2();
   },
   showBothofDealersCards: function () {
@@ -175,33 +193,32 @@ var blackjack = {
     deck.splice(dealerXCardDealtRandomizedNumber, 1);
     blackjack.inPlay.dealerCards.push(dealerActualXCard);
   },
-  AceValue: function () {
-    for (j = 0; j < this.inPlay.dealerCards.length; j++) {
-      if (blackjack.inPlay.dealerCards[j].Card == 'Ace') {
-        var dealerAce = blackjack.inPlay.dealerCards[j]
-        if (dealerCardValue > 10) {
-          dealerAce.Value = 1;
-        } else {
-          dealerAce.Value = 11;
-        };
-      };
-    };
-  },
-  //
-  AceValue2: function () {
-        if(dealerCardValue < 10){
-          if(this.inPlay.dealerAce.length > 1){
-            this.inPlay.dealerAce[0].value = 11
-          }
-        }
-  },
+  // AceValue: function () {
+  //   for (j = 0; j < this.inPlay.dealerCards.length; j++) {
+  //     if (blackjack.inPlay.dealerCards[j].Card == 'Ace') {
+  //       var dealerAce = blackjack.inPlay.dealerCards[j]
+  //       if (dealerCardValue > 10) {
+  //         dealerAce.Value = 1;
+  //       } else {
+  //         dealerAce.Value = 11;
+  //       };
+  //     };
+  //   };
+  // },
+  // //
+  // AceValue2: function () {
+  //       if(dealerCardValue < 10){
+  //         if(this.inPlay.dealerAce.length > 1){
+  //           this.inPlay.dealerAce[0].value = 11
+  //         }
+  //       }
+  // },
   //
   playerHitMechanic: function () {
     var that = this;
     $('#HitMe').one("click", function (e) {
       var playerHitCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
       var playerActualHitCard = deck[playerHitCardDealtRandomizedNumber];
-      deck.splice(playerHitCardDealtRandomizedNumber, 1);
       if (playerActualHitCard.Card == 'Ace') {
         that.inPlay.playerAces.push(playerActualHitCard)
         if (that.inPlay.playerAces.length = 1 && playerCardValue < 11) {
@@ -209,9 +226,18 @@ var blackjack = {
         } else if (that.inPlay.playerAces.length = 2) {
           that.inPlay.playerAces[0].Value = 11
           that.inPlay.playerAces[1].Value = 1
+        } else {
+          for (var t = 1; t < that.inPlay.playerAces.length; t++) {
+            that.inPlay.playerAces[t].Value = 1
+          }
         }
       } else {
         that.inPlay.playerCards.push(playerActualHitCard);
+      }
+      deck.splice(playerHitCardDealtRandomizedNumber, 1);
+      if (playerActualHitCard.Card == 'Ace') {
+        var playerHitCardIsAce = that.inPlay.playerAces[that.inPlay.playerAces.length - 1].Value
+        playerCardValue = playerCardValue + playerHitCardisAce
       }
       var playerHitCardValue = that.inPlay.PlayerCards[that.inPlay.PlayerCards.length].Value;
       playerCardValue = playerCardValue + playerHitCardValue;
