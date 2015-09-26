@@ -82,15 +82,17 @@ var blackjack = {
   dealDealerCard1: function () {
     var dealerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualFirstCard = deck[dealerFirstCardDealtRandomizedNumber];
+    debugger;
     if (dealerActualFirstCard.Card == 'Ace') {
       blackjack.inPlay.dealerAces.push(dealerActualFirstCard)
       blackjack.inPlay.dealerAces[0].Value = 11
+      deck.splice(dealerFirstCardDealtRandomizedNumber, 1)
       this.dealerFirstCardisAnAceValue();
     } else {
       blackjack.inPlay.dealerCards.push(dealerActualFirstCard);
+      deck.splice(dealerFirstCardDealtRandomizedNumber, 1)
       this.dealerFirstCardisNotAnAceValue();
-    };
-    deck.splice(dealerFirstCardDealtRandomizedNumber, 1);
+    }
   },
   dealPlayerCard2: function () {
     var playerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
