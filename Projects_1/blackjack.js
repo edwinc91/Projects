@@ -96,25 +96,28 @@ var blackjack = {
     var playerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var playerActualSecondCard = deck[playerSecondCardDealtRandomizedNumber];
     if (playerActualSecondCard.Card == 'Ace') {
-      blackjack.inPlay.playerAces.push(playerActualSecondCard)
-      if (blackjack.inPlay.playerAces.length = 1) {
+      if (blackjack.inPlay.playerAces.length = 0) {
+        blackjack.inPlay.playerAces.push(playerActualSecondCard)
         blackjack.inPlay.playerAces[0].Value = 11
+        deck.splice(playerSecondCardDealtRandomizedNumber, 1);
         this.updatePlayerCard2ValueOneAce()
-      } else if (blackjack.inPlay.playerAces.length = 2) {
+      } else if (blackjack.inPlay.playerAces.length = 1) {
+        blackjack.inPlay.playerAces.push(playerActualSecondCard)
         blackjack.inPlay.playerAces[0].Value = 11
         blackjack.inPlay.playerAces[1].Value = 1
+        deck.splice(playerSecondCardDealtRandomizedNumber, 1);
         this.updatePlayerCard2ValueTwoAce()
       }
     } else {
       blackjack.inPlay.playerCards.push(playerActualSecondCard);
       if (this.inPlay.playerAces.length = 0) {
+        deck.splice(playerSecondCardDealtRandomizedNumber, 1);
         this.updatePlayerCard2ValueNoAce();
-      } else {
-        this.updatePlayerCard1Value();
+      } else if (this.inPlay.playerAces.length = 1) {
+        deck.splice(playerSecondCardDealtRandomizedNumber, 1);
         this.updatePlayerCard2ValueOneAce();
       }
     };
-    deck.splice(playerSecondCardDealtRandomizedNumber, 1);
   },
   dealDealerCard2: function () {
     var dealerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
@@ -137,8 +140,8 @@ var blackjack = {
     //   playerCardValue = currentPlayerCardValue
     // };
   updatePlayerCard1Value : function () {
-    if (this.inPlay.playerAces.length !== 0) {
-      var playerFirstCardIsAce = this.inPlay.playerAces[0].Value;
+    if (this.inPlay.playerAces.length > 0) {
+      var playerFirstCardIsAce = blackjack.inPlay.playerAces[0].Value;
       playerCardValue = playerFirstCardIsAce
     } else {
     var playerCard1Value = blackjack.inPlay.playerCards[0].Value;
@@ -152,9 +155,8 @@ var blackjack = {
     this.dealDealerCard2();
   },
   updatePlayerCard2ValueOneAce: function () {
-    var playerSecondCardWasAnAce = blackjack.inPlay.playerAces[0].Value;
-    var playerHasNonAceOneOutOfTwo = blackjack.inPlay.playerCards[0].Value;
-    playerCardValue = playerHasNonAceOneOutOfTwo + playerSecondCardWasAnAce
+    var playerNonAceValue = blackjack.inPlay.playerCards[0].Value;
+    playerCardValue = playerNonAceValue + playerCardValue
     this.dealDealerCard2();
   },
   updatePlayerCard2ValueTwoAce: function () {
