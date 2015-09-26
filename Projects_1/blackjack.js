@@ -166,7 +166,7 @@ var blackjack = {
     dealerCardValue = dealerFirstCardIsAnAce
     this.dealPlayerCard2();
   },
-  showBothofDealersCards: function () {
+  showBothofDealersCardsNoAce: function () {
     var dealerCard2Value = blackjack.inPlay.dealerCards[1].Value;
     if (dealerCardValue !== dealerCard1Value + dealerCard2Value) {
       dealerCardValue = dealerCard1Value + dealerCard2Value
@@ -174,24 +174,33 @@ var blackjack = {
       return dealerCardValue;
     }
   },
+  showBothofDealersCardsOneAce: function () {
+
+  },
+  showBothofDealersCardsTwoAce: function () {
+
+  },
   dealerHitMechanic: function () {
     if (dealerCardValue < 17) {
       this.dealerHit();
       var numberOfCardsDealerIsHolding = blackjack.inPlay.dealerCards;
       var dealerCard3Value = numberOfCardsDealerIsHolding[numberOfCardsDealerIsHolding.length - 1].Value;
       dealerCardValue = dealerCardValue + dealerCard3Value;}
-    // } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
-    //   this.dealerHit();
-    //   var dealerCard3Value = blackjack.inPlay.dealerCards[3].Value;
-    //   dealerCardValue = dealerCardValue + dealerCard3Value
-    // } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
+    else if (dealerCardValue = 17 && this.inPlay.dealerAces.length = 1) {
+      var dealerCard3ValueHasOneAce =
+      if (dealerCardValue > 10) {
+        this.inPlay.dealerAces[0].Value = 1
+      }
+    } else if (dealerCardValue = 17 && this.inPlay.dealerAces.length !== 0) {
+      this.dealerHit();
+      var dealerCard3Value = blackjack.inPlay.dealerCards[3].Value;
+      dealerCardValue = dealerCardValue + dealerCard3Value
+    } else if (dealerCardValue = 17 && this.inPlay.dealerCards.contains) {
 
     else {
       return dealerCardValue;
     }
   },
-
-
   dealerHit: function () {
     var dealerXCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualXCard = deck[dealerXCardDealtRandomizedNumber];
