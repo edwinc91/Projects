@@ -78,13 +78,13 @@ var blackjack = {
     if (playerActualFirstCard.Card == 'Ace') {
       blackjack.inPlay.playerAces.push(playerActualFirstCard)
       blackjack.inPlay.playerAces[0].Value = 11
-      this.killUndefinedFunction();
+      this.killUndefinedFunction()
     } else {
-      blackjack.inPlay.playerCards.push(playerActualFirstCard);
+      blackjack.inPlay.playerCards.push(playerActualFirstCard)
     };
-    deck.splice(playerFirstCardDealtRandomizedNumber, 1);
-    this.killUndefinedFunction();
-    this.updatePlayerCard1Value();
+    deck.splice(playerFirstCardDealtRandomizedNumber, 1)
+    this.killUndefinedFunction()
+    this.updatePlayerCard1Value()
   },
   dealDealerCard1: function () {
     var dealerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
@@ -109,7 +109,7 @@ var blackjack = {
       if (this.inPlay.playerAces.length = 1) {
         blackjack.inPlay.playerAces[0].Value = 11
         this.killUndefinedFunction()
-        blackjack.updatePlayerCard2ValueSecondCardAce()
+        blackjack.updatePlayerCardValueSecondCardAce()
       } else if (blackjack.inPlay.playerAces.length > 1) {
         blackjack.inPlay.playerAces[0].Value = 11
         blackjack.inPlay.playerAces[1].Value = 1
@@ -151,12 +151,12 @@ var blackjack = {
     var playerCard1Value = blackjack.inPlay.playerCards[0].Value;
       playerCardValue = playerCard1Value
     }
-    this.dealDealerCard1();
+    this.dealDealerCard1()
   },
   updatePlayerCard2ValueNoAce: function () {
     var playerCard2Value = blackjack.inPlay.playerCards[this.inPlay.playerCards.length - 1].Value;
     if (this.inPlay.playerAces.length = 0) {
-      playerCardValue += playerCard2Value;
+      playerCardValue += playerCard2Value
       this.dealDealerCard2()
     } else if (this.inPlay.playerAces.length = 1) {
       playerCardValue += playerCard2Value
@@ -204,39 +204,49 @@ var blackjack = {
   },
   dealerHitMechanic: function () {
     if (dealerCardValue < 17) {
-      this.dealerHit();
-      var numberOfCardsDealerIsHolding = blackjack.inPlay.dealerCards;
-      var dealerCard3Value = numberOfCardsDealerIsHolding[numberOfCardsDealerIsHolding.length - 1].Value;
-      dealerCardValue = dealerCardValue + dealerCard3Value
-    } else if (dealerCardValue = 17) {
-      if (this.inPlay.dealerAces.length = 1)
-        this.dealerHit()
-        if (this.inPlay.dealerAces.length = 1) {
-          if (this.inPlay.dealerCards[this.inPlay.dealerCards.length - 1].Value > 4) {
-            this.inPlay.dealerAces[0].Value = 1
-          } else {
-            for (var o = 1; o < this.inPlay.dealerAces.length; o++) {
-              this.inPlay.dealerAces[o].Value = 1
-            }
-          }
-        }
-      } else {
-        this.dealerStay()
+      this.dealerHit()
+      debugger;
+      if (this.inPlay.dealerAces.length = 0) {
+        var numberOfCardsDealerIsHolding = blackjack.inPlay.dealerCards.length;
+        var dealerCard3Value = blackjack.inPlay.dealerCards[numberOfCardsDealerIsHolding.length - 1].Value;
+        dealerCardValue = dealerCardValue + dealerCard3Value
+      } else if (this.inPlay.dealerAces.length !== 0 && dealerCardValue < 11) {
+        this.inPlay.dealerAces[0].Value = 11
+        dealerCardValue = dealerCardValue + this.inPlay.dealerAces[0].Value
+      } else if (this.inPlay.dealerAces.length !== 0 && dealerCardValue > 10) {
+        this.inPlay.dealerAces[0].Value = 1
+        dealerCardValue = dealerCardValue + this.inPlay.dealerAces[0].Value
+      }
+    } else if (dealerCardValue = 17 && this.inPlay.dealerAces.length !== 0) {
+      this.dealerHit()
+    } else {
+      this.dealerStay()
     }
   },
+  // }
+  //     if (this.inPlay.dealerAces.length = 1) {
+  //       if (this.inPlay.dealerCards[this.inPlay.dealerCards.length - 1].Value > 4) {
+  //         this.inPlay.dealerAces[0].Value = 1
+  //       } else {
+  //         for (var o = 1; o < this.inPlay.dealerAces.length; o++) {
+  //           this.inPlay.dealerAces[o].Value = 1
+  //         }
+  //       }
+  //     }
   dealerHit: function () {
     var dealerXCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualXCard = deck[dealerXCardDealtRandomizedNumber];
-    if (dealerActualXCard.Card = 'Ace') {
-      blackjack.inPlay.dealerAces.push(dealerActualXCard)
+    if (dealerActualXCard.Card !== 'Ace') {
+      blackjack.inPlay.dealerCards.push(dealerActualXCard)
+      deck.splice(dealerXCardDealtRandomizedNumber, 1)
     } else {
-      blackjack.inPlay.dealerCards.push(dealerActualXCard);
+      blackjack.inPlay.dealerAces.push(dealerActualXCard)
+      deck.splice(dealerXCardDealtRandomizedNumber, 1)
     }
-    deck.splice(dealerXCardDealtRandomizedNumber, 1);
   },
   dealerStay: function () {
     console.log("dealerCardValue")
-    this.outcome();
+    this.outcome()
   },
   // AceValue: function () {
   //   for (j = 0; j < this.inPlay.dealerCards.length; j++) {
@@ -292,15 +302,16 @@ var blackjack = {
         }
       }
     } else {
-      that.inPlay.playerCards.push(playerActualHitCard);
+      that.inPlay.playerCards.push(playerActualHitCard)
     }
-    deck.splice(playerHitCardDealtRandomizedNumber, 1);
+    deck.splice(playerHitCardDealtRandomizedNumber, 1)
     if (playerActualHitCard.Card == 'Ace') {
       var playerHitCardIsAce = that.inPlay.playerAces[that.inPlay.playerAces.length - 1].Value
       playerCardValue = playerCardValue + playerHitCardisAce
+    } else {
+      var playerHitCardValue = blackjack.inPlay.playerCards[blackjack.inPlay.playerCards.length - 1].Value;
+      playerCardValue = playerCardValue + playerHitCardValue
     }
-    var playerHitCardValue = blackjack.inPlay.playerCards[blackjack.inPlay.playerCards.length].Value;
-    playerCardValue = playerCardValue + playerHitCardValue;
     if (playerCardValue > 21) {
         return "Bust!"
     } else {
@@ -326,7 +337,7 @@ var blackjack = {
       console.log("Player Wins!")
       this.clearTable()
       this.rounds++
-    };
+    }
   },
   bustingOutcome: function () {
     if (playerCardValue > 21 && dealerCardValue < 22) {
@@ -338,7 +349,7 @@ var blackjack = {
   },
   clearTable: function() {
     // set up html/css interactions that clear the images of the cards
-    this.killUndefinedFunction();
+    this.killUndefinedFunction()
     for (var q = 0; q < this.inPlay.playerCards.length; q++) {
       this.usedCards.push(this.inPlay.playerCards[q])
     }
