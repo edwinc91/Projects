@@ -190,11 +190,7 @@ var blackjack = {
   },
   showBothofDealersCardsNoAce: function () {
     var dealerCard2Value = blackjack.inPlay.dealerCards[1].Value;
-    if (dealerCardValue !== dealerCard1Value + dealerCard2Value) {
-      dealerCardValue = dealerCard1Value + dealerCard2Value
-    } else {
-      return dealerCardValue;
-    }
+    dealerCardValue = dealerCard1Value + dealerCard2Value
   },
   showBothofDealersCardsOneAce: function () {
 
@@ -342,9 +338,16 @@ var blackjack = {
   bustingOutcome: function () {
     if (playerCardValue > 21 && dealerCardValue < 22) {
       console.log("Dealer Wins!")
-    }
-    if (playerCardValue < 22 && dealerCardValue > 21) {
+      this.clearTable()
+      if (deck.length < 20) {
+        this.shuffleDeck()
+      }
+    } else if (playerCardValue < 22 && dealerCardValue > 21) {
       console.log("Player Wins!")
+      this.clearTable()
+      if (deck.length < 20) {
+        this.shuffleDeck()
+      }
     }
   },
   clearTable: function() {
