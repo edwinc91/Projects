@@ -149,8 +149,10 @@ var blackjack = {
     var playerActualFirstCard = deck[playerFirstCardDealtRandomizedNumber];
     if (playerActualFirstCard.Card !== 'Ace') {
       blackjack.inPlay.playerCards.push(playerActualFirstCard)
+      $('.playercards').text(playerActualFirstCard.Card + " " + playerActualFirstCard.Suit)
     } else {
       blackjack.inPlay.killUndefinedsPlayers.push(playerActualFirstCard)
+      $('.playercards').text(playerActualFirstCard.Card + " " + playerActualFirstCard.Suit)
       blackjack.inPlay.killUndefinedsPlayers[0].Value = 11
       this.killUndefinedFunctionPlayer()
     }
@@ -163,12 +165,14 @@ var blackjack = {
     var dealerActualFirstCard = deck[dealerFirstCardDealtRandomizedNumber];
     if (dealerActualFirstCard.Card == 'Ace') {
       blackjack.inPlay.killUndefinedsDealers.push(dealerActualFirstCard)
+      $('.playercards').text(dealerActualFirstCard.Card + " " + dealerActualFirstCard.Suit)
       blackjack.killUndefinedFunctionDealer()
       blackjack.inPlay.dealerAces[0].Value = 11
       deck.splice(dealerFirstCardDealtRandomizedNumber, 1)
       this.dealerFirstCardisAnAceValue();
     } else {
       blackjack.inPlay.dealerCards.push(dealerActualFirstCard);
+      $('.dealercards').text(dealerActualFirstCard.Card + " " + dealerActualFirstCard.Suit)
       deck.splice(dealerFirstCardDealtRandomizedNumber, 1)
       this.dealerFirstCardisNotAnAceValue();
     }
@@ -178,6 +182,7 @@ var blackjack = {
     var playerActualSecondCard = deck[playerSecondCardDealtRandomizedNumber];
     if (playerActualSecondCard.Card == 'Ace') {
       blackjack.inPlay.killUndefinedsPlayers.push(playerActualSecondCard)
+      $('.playercards').text($('playercards').text() + " and " + playerActualSecondCard.Card + " " + playerActualSecondCard.Suit)
       deck.splice(playerSecondCardDealtRandomizedNumber, 1)
       this.killUndefinedFunctionPlayer()
       if (this.inPlay.playerAces.length = 1) {
@@ -190,6 +195,7 @@ var blackjack = {
       };
     } else {
       blackjack.inPlay.playerCards.push(playerActualSecondCard)
+      $('.playercards').text($('playercards').text() + " and " + playerActualSecondCard.Card + " " + playerActualSecondCard.Suit)
       deck.splice(playerSecondCardDealtRandomizedNumber, 1)
       this.updatePlayerCard2ValueNoAce()
     }
@@ -200,6 +206,7 @@ var blackjack = {
     this.killUndefinedFunctionDealer();
     if (dealerActualSecondCard.Card == 'Ace') {
       blackjack.inPlay.killUndefinedsDealers.push(dealerActualSecondCard)
+      $('.dealercards').text($('.dealercards').text() + " and " + dealerActualSecondCard.Card + " " + dealerActualSecondCard.Suit)
       this.killUndefinedFunctionDealer()
       deck.splice(dealerSecondCardDealtRandomizedNumber, 1);
       if (blackjack.inPlay.dealerAces.length = 1) {
@@ -207,6 +214,7 @@ var blackjack = {
       }
     } else {
       blackjack.inPlay.dealerCards.push(dealerActualSecondCard);
+      $('.dealercards').text($('.dealercards').text() + " and " + dealerActualSecondCard.Card + " " + dealerActualSecondCard.Suit)
       deck.splice(dealerSecondCardDealtRandomizedNumber, 1);
     }
     this.playerStay()
