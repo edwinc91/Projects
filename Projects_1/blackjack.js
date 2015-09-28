@@ -52,6 +52,9 @@ var deck = [
   {Card: 'Ace', Suit: 'Heart', Value: undefined},
   {Card: 'Ace', Suit: 'Spade', Value: undefined}
 ];
+$('#Start').on("click", function (e) {
+  blackjack.dealPlayerCard1()
+});
 
 var playerCardValue = undefined;
 var dealerCardValue = undefined;
@@ -60,16 +63,23 @@ var blackjack = {
   cards: deck,
   rounds: 0,
   inPlay: {
-    killUndefineds: [],
+    killUndefinedsPlayers: [],
+    killUndefinedsDealers: [],
     playerAces: [], // if playerAces.length > 2 - playerAces[1].value = 1
     dealerAces: [], // ^^
     playerCards: [],
     dealerCards: [],
   },
   usedCards: [],
-  killUndefinedFunction: function () {
-    if (this.inPlay.playerAces.length > 0 || this.inPlay.killUndefineds.length > 0) {
-      this.inPlay.playerAces = this.inPlay.killUndefineds.filter(Boolean);
+
+  killUndefinedFunctionPlayer: function () {
+    if (this.inPlay.playerAces.length > 0 || this.inPlay.killUndefinedsPlayers.length > 0) {
+      this.inPlay.playerAces = this.inPlay.killUndefinedsPlayers.filter(Boolean);
+    }
+  },
+  killUndefinedFunctionDealer: function () {
+    if (this.inPlay.dealerAces.length > 0 || this.inPlay.killUndefinedsDealers.length > 0) {
+      this.inPlay.dealerAces = this.inPlay.killUndefinedsDealers.filter(Boolean);
     }
   },
   dealPlayerCard1: function () {
@@ -78,19 +88,20 @@ var blackjack = {
     if (playerActualFirstCard.Card !== 'Ace') {
       blackjack.inPlay.playerCards.push(playerActualFirstCard)
     } else {
-      blackjack.inPlay.killUndefineds.push(playerActualFirstCard)
-      blackjack.inPlay.killUndefineds[0].Value = 11
-      this.killUndefinedFunction()
+      blackjack.inPlay.killUndefinedsPlayers.push(playerActualFirstCard)
+      blackjack.inPlay.killUndefinedsPlayers[0].Value = 11
+      this.killUndefinedFunctionPlayer()
     }
     deck.splice(playerFirstCardDealtRandomizedNumber, 1)
-    this.killUndefinedFunction()
+    this.killUndefinedFunctionPlayer()
     this.updatePlayerCard1Value()
   },
   dealDealerCard1: function () {
     var dealerFirstCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualFirstCard = deck[dealerFirstCardDealtRandomizedNumber];
     if (dealerActualFirstCard.Card == 'Ace') {
-      blackjack.inPlay.dealerAces.push(dealerActualFirstCard)
+      blackjack.inPlay.killUndefinedsDealers.push(dealerActualFirstCard)
+      blackjack.killUndefinedFunctionDealer()
       blackjack.inPlay.dealerAces[0].Value = 11
       deck.splice(dealerFirstCardDealtRandomizedNumber, 1)
       this.dealerFirstCardisAnAceValue();
@@ -104,9 +115,9 @@ var blackjack = {
     var playerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var playerActualSecondCard = deck[playerSecondCardDealtRandomizedNumber];
     if (playerActualSecondCard.Card == 'Ace') {
-      blackjack.inPlay.killUndefineds.push(playerActualSecondCard)
+      blackjack.inPlay.killUndefinedsPlayers.push(playerActualSecondCard)
       deck.splice(playerSecondCardDealtRandomizedNumber, 1)
-      this.killUndefinedFunction()
+      this.killUndefinedFunctionPlayer()
       if (this.inPlay.playerAces.length = 1) {
         blackjack.inPlay.playerAces[0].Value = 11
         blackjack.updatePlayerCardValueSecondCardAce()
@@ -124,9 +135,10 @@ var blackjack = {
   dealDealerCard2: function () {
     var dealerSecondCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
     var dealerActualSecondCard = deck[dealerSecondCardDealtRandomizedNumber];
-    this.killUndefinedFunction();
+    this.killUndefinedFunctionDealer();
     if (dealerActualSecondCard.Card == 'Ace') {
-      blackjack.inPlay.dealerAces.push(dealerActualSecondCard)
+      blackjack.inPlay.killUndefinedsDealers.push(dealerActualSecondCard)
+      this.killUndefinedFunctionDealer()
       deck.splice(dealerSecondCardDealtRandomizedNumber, 1);
       if (blackjack.inPlay.dealerAces.length = 1) {
         blackjack.inPlay.dealerAces[0].Value = 11
@@ -198,12 +210,32 @@ var blackjack = {
     this.dealPlayerCard2()
   },
   showBothofDealersCardsNoAce: function () {
-    if (this.inPlay.dealerAces.length = 0) {
+    this.inPlay.dealerAces = []
+    this.killUndefinedFunctionDealer()
+    console.log(this.inPlay.dealerAces)
+    if (this.inPlay.killUndefinedsDealers.length = 0) {
+      this.killUndefinedFunctionDealer()
       var dealerCard2Value = blackjack.inPlay.dealerCards[blackjack.inPlay.dealerCards.length - 1].Value;
       dealerCardValue = dealerCardValue + dealerCard2Value
     } else if (this.inPlay.dealerAces.length = 1) {
-      dealerCardValue = this.inPlay.dealerAces[0].Value + this.inPlay.dealerCards[0].Value
+      this.killUndefinedFunctionDealer()
+      dealerCardValue = dealerCardValue + blackjack.inPlay.dealerCards[blackjack.inPlay.dealerCards.length - 1].Value
+      // if (this.inPlay.dealerAces.length = 1) {
+      //   this.killUndefinedFunctionDealer()
+      //   if (this.inPlay.dealerAces.length = 1) {
+      //     this.killUndefinedFunctionDealer()
+      //     if (this.inPlay.dealerAces.length = 1 && this.inPlay.dealerAces.length = 1) {
+      //       this.killUndefinedFunctionDealer()
+      //       dealerCardValue = this.inPlay.dealerAces[0].Value + this.inPlay.dealerCards[0].Value
+      //     } else if (this.inPlay.dealerAces.length = 0) {
+      //       this.showBothofDealersCardsNoAce()
+      //     }
+      //   }
+      // } else {
+      //   this.showBothofDealersCardsNoAce()
+      // }
     } else {
+      this.killUndefinedFunctionDealer()
       dealerCardValue = this.inPlay.dealerAces[0].Value + this.inPlay.dealerAces[1].Value
     }
     console.log(dealerCardValue)
@@ -285,12 +317,14 @@ var blackjack = {
       deck.splice(dealerXCardDealtRandomizedNumber, 1)
     } else {
       if (dealerCardValue < 11) {
-        blackjack.inPlay.dealerAces.push(dealerActualXCard)
         dealerActualXCard.Value = 11
+        blackjack.inPlay.killUndefinedsDealers.push(dealerActualXCard)
+        this.killUndefinedFunctionDealer()
         dealerCardValue = dealerCardValue + dealerActualXCard.Value
       } else if (dealerCardValue > 11) {
-        blackjack.inPlay.dealerAces.push(dealerActualXCard)
         dealerActualXCard.Value = 1
+        blackjack.inPlay.killUndefinedsDealers.push(dealerActualXCard)
+        this.killUndefinedFunctionDealer()
         dealerCardValue++
       }
       deck.splice(dealerXCardDealtRandomizedNumber, 1)
@@ -340,7 +374,8 @@ var blackjack = {
       var playerHitCardDealtRandomizedNumber = Math.floor(Math.random() * deck.length);
       var playerActualHitCard = deck[playerHitCardDealtRandomizedNumber];
       if (playerActualHitCard.Card == 'Ace') {
-        that.inPlay.playerAces.push(playerActualHitCard)
+        that.inPlay.killUndefinedsPlayers.push(playerActualHitCard)
+        that.killUndefinedFunctionPlayer()
         if (that.inPlay.playerAces.length = 1) {
           if (playerCardValue < 11) {
             that.inPlay.playerAces[0].Value = 11
@@ -390,6 +425,8 @@ var blackjack = {
     var that = this;
     $('#Stay').one("click", function (e) {
       console.log("Player Stays!")
+      that.killUndefinedFunctionDealer()
+      that.killUndefinedFunctionPlayer()
       that.showBothofDealersCardsNoAce()
     })
   },
@@ -431,8 +468,11 @@ var blackjack = {
   clearTable: function() {
     // set up html/css interactions that clear the images of the cards
     this.inPlay.playerAces = []
-    this.killUndefinedFunction()
-    this.inPlay.killUndefineds = []
+    this.killUndefinedFunctionPlayer()
+    this.inPlay.dealerAces = []
+    this.killUndefinedFunctionDealer()
+    this.inPlay.killUndefinedsPlayers = []
+    this.inPlay.killUndefinedsDealers = []
     for (var q = 0; q < this.inPlay.playerCards.length; q++) {
       this.usedCards.push(this.inPlay.playerCards[q])
     }
